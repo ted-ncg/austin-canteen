@@ -7,5 +7,6 @@ Canteen gift card project for the Visa NCG Enterprise Java course in Austin, TX
 Add your name...
 
 * Ted M. Young
+* Matthew Levy
 
 
