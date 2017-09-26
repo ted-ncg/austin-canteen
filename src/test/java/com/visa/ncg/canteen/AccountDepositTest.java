@@ -3,6 +3,7 @@ package com.visa.ncg.canteen;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AccountDepositTest {
 
@@ -32,6 +33,16 @@ public class AccountDepositTest {
 
     assertThat(account.balance())
         .isEqualTo(15);
+  }
+
+  @Test
+  public void depositOfNegative15DollarsResultInIlligalArgumentException() {
+    Account account = new Account();
+
+    assertThatThrownBy(() -> {account.deposit(-15);}).isInstanceOf(IllegalArgumentException.class);
+
+
+
   }
 
 }

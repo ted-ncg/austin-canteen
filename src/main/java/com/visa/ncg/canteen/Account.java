@@ -7,15 +7,17 @@ public class Account {
   private int balance = 0;
 
   public void deposit(int amount) {
-    balance += amount;
+    if(amount <= 0) {
+      throw new IllegalArgumentException();
+    } else {
+      balance += amount;
+    }
   }
 
   public void withdraw(int amount) {
-    if(amount < 0) {
+    if(amount <= 0) {
       throw new IllegalArgumentException();
-    }
-
-    else if(amount > balance) {
+    } else if(amount > balance) {
         throw new InsufficientBalanceException();
 
     } else {
