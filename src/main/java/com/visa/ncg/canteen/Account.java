@@ -21,6 +21,10 @@ public class Account {
   }
 
   public void withdraw(int amount) {
-    balance -= amount;
+      if (amount < 0) {
+          throw new InsufficientBalanceException();
+      }
+
+      balance -= amount;
   }
 }
