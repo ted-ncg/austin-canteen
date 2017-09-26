@@ -3,6 +3,7 @@ package com.visa.ncg.canteen;
 public class Account {
 
   private int balance;
+  private Long id;
 
   public Account() {
     balance = 0;
@@ -39,5 +40,13 @@ public class Account {
     if (amount > balance) {
       throw new InsufficientBalanceException();
     }
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 }
