@@ -15,11 +15,7 @@ public class AccountWithdrawTest {
         Account account = new Account();
 
         account.deposit(70);
-        try {
-            account.withdraw(30);
-        } catch (InsufficientBalanceException e) {
-            e.printStackTrace();
-        }
+        account.withdraw(30);
 
         assertThat(account.balance()).isEqualTo(40);
     }
@@ -34,15 +30,12 @@ public class AccountWithdrawTest {
 
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void withdrawNegativeAmountResultsInError() {
         Account account = new Account();
 
         account.deposit(20);
-        try {
-            account.withdraw(-10);
-        } catch (InsufficientBalanceException e) {
-            e.printStackTrace();
-        }
+
+        assertThatThrownBy(() -> {account.withdraw(-10);}).isInstanceOf(IllegalArgumentException.class);
     }
 }
