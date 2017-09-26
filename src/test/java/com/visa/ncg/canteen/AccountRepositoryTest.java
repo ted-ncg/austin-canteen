@@ -11,6 +11,7 @@ public class AccountRepositoryTest {
 
     @Test
     public void findAllShouldReturn2Accounts() {
+
         List<Account> accounts = new ArrayList<>();
 
         Account a1 = new Account();
@@ -23,10 +24,12 @@ public class AccountRepositoryTest {
         AccountRepository repo = new AccountRepository(accounts);
         assertThat(repo.findAll())
                 .hasSize(2);
+
     }
 
     @Test
     public void saveNewAccountAssignsIdToAccount() throws Exception {
+
         Account account = new Account();
 
         AccountRepository repo = new AccountRepository();
@@ -34,10 +37,12 @@ public class AccountRepositoryTest {
 
         assertThat(account.getId())
                 .isNotNull();
+
     }
 
     @Test
     public void newlySavedAccountsHaveUniqueIds() {
+
         AccountRepository accountRepository = new AccountRepository();
         Account account1 = new Account();
         accountRepository.save(account1);
@@ -46,6 +51,7 @@ public class AccountRepositoryTest {
 
         assertThat(account1.getId())
                 .isNotEqualTo(account2.getId());
+
     }
 
     @Test
@@ -54,11 +60,12 @@ public class AccountRepositoryTest {
         AccountRepository accountRepo = new AccountRepository();
         Account account = new Account();
 
-        account.setId(2);
+        account.setId(2L);
         accountRepo.save(account);
 
         assertThat(accountRepo.findOne(1L))
                 .isNull();
+
     }
 
     @Test
@@ -75,6 +82,7 @@ public class AccountRepositoryTest {
 
         assertThat(foundAccount.getId())
                 .isEqualTo(1L);
+
     }
 
 }

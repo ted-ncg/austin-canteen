@@ -25,6 +25,7 @@ public class AccountWithdrawTest {
 
         assertThatThrownBy(() -> account.withdraw(-12))
                 .isInstanceOf(InvalidAmountException.class);
+
     }
 
     @Test
@@ -34,5 +35,6 @@ public class AccountWithdrawTest {
 
         assertThatThrownBy(() -> { account.withdraw(12); })
                 .isInstanceOf(InsufficientBalanceException.class);
+
     }
 }

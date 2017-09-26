@@ -7,42 +7,46 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AccountDepositTest {
 
-  @Test
-  public void newAccountsHaveZeroBalance() throws Exception {
-    assertThat(new Account().balance())
-        .isZero();
-  }
+    @Test
+    public void newAccountsHaveZeroBalance() throws Exception {
 
-  @Test
-  public void deposit10DollarsToNewAccountResultsInAccountHaving10Dollars() throws Exception {
+        assertThat(new Account().balance())
+                .isZero();
 
-    Account account = new Account();
+    }
 
-    account.deposit(10);
+    @Test
+    public void deposit10DollarsToNewAccountResultsInAccountHaving10Dollars() throws Exception {
 
-    assertThat(account.balance())
-        .isEqualTo(10);
-  }
+        Account account = new Account();
 
-  @Test
-  public void twoDepositsOf10And5DollarsResultInAccountHaving15Dollars() throws Exception {
-    Account account = new Account();
+        account.deposit(10);
 
-    account.deposit(10);
-    account.deposit(5);
+        assertThat(account.balance())
+                .isEqualTo(10);
+    }
 
-    assertThat(account.balance())
-        .isEqualTo(15);
-  }
+    @Test
+    public void twoDepositsOf10And5DollarsResultInAccountHaving15Dollars() throws Exception {
 
-  @Test
-  public void depositingNegativeAmountThrowsException() throws Exception {
+        Account account = new Account();
 
-    Account account = new Account();
+        account.deposit(10);
+        account.deposit(5);
 
-    assertThatThrownBy(() -> account.deposit(-1))
-            .isInstanceOf(InvalidAmountException.class);
-  }
+        assertThat(account.balance())
+                .isEqualTo(15);
+
+    }
+
+    @Test
+    public void depositingNegativeAmountThrowsException() throws Exception {
+        Account account = new Account();
+
+        assertThatThrownBy(() -> account.deposit(-1))
+                .isInstanceOf(InvalidAmountException.class);
+
+    }
 
 
 }

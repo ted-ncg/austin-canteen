@@ -6,43 +6,46 @@ public class Account {
 
     private Long id = null;
 
-    public Account() {
-        balance = 0;
+    public Account() { balance = 0; }
+
+    public Account(int initialBalance) { balance = initialBalance; }
+
+    public void setId(long id) { this.id = id; }
+
+    public Long getId() { return id; }
+
+    public void validateWithdrawAmount(int amount) {
+
+        if (amount < 0)
+            throw new InvalidAmountException();
+
     }
 
-    public Account(int initialBalance) {
-        balance = initialBalance;
-    }
+    public void validateBalance(int amount) {
 
-    public void setId(long id) {
-        this.id = id;
+        if (amount > balance)
+            throw new InsufficientBalanceException();
+
     }
 
     public void deposit(int amount) {
-        if (amount < 0) {
-            throw new InvalidAmountException();
-        }
+
+        validateWithdrawAmount(amount);
 
         balance += amount;
+
     }
 
-    public int balance() {
-        return balance;
-    }
+    public int balance() { return balance; }
 
     public void withdraw(int amount) {
-        if (amount < 0) {
-            throw new InvalidAmountException();
-        }
 
-        if (amount > balance) {
-            throw new InsufficientBalanceException();
-        }
+        validateWithdrawAmount(amount);
+
+        validateBalance(amount);
 
         balance -= amount;
+
     }
 
-    public Long getId() {
-        return id;
-    }
 }

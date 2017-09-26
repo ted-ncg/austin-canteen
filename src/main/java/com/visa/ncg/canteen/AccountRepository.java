@@ -11,15 +11,19 @@ public class AccountRepository {
     private AtomicLong count;
 
     public AccountRepository() {
+
         count = new AtomicLong();
         accountMap = new HashMap<>();
+
     }
 
     public AccountRepository(List<Account> accounts) {
+
         this();
         for (Account account : accounts) {
             accountMap.put(account.getId(), account);
         }
+
     }
 
     public Account findOne(Long id) {
@@ -27,6 +31,7 @@ public class AccountRepository {
         // If there's no Account with that id, return null.
 
         return accountMap.get(id);
+
     }
 
     public Account save(Account entity) {
@@ -42,12 +47,15 @@ public class AccountRepository {
         accountMap.put(entity.getId(), entity);
 
         return entity;
+
     }
 
     public List<Account> findAll() {
         // Return all accounts as a List
         // If there are no accounts, return empty List
+
         return new ArrayList<>(accountMap.values());
+
     }
 
 }
