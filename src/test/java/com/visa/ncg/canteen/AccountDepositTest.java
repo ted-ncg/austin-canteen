@@ -7,13 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AccountDepositTest {
 
   @Test
-  public void newAccountsHaveZeroBalance() throws Exception {
+  public void newAccountsHaveZeroBalance()  {
     assertThat(new Account().balance())
         .isZero();
   }
 
   @Test
-  public void deposit10DollarsToNewAccountResultsInAccountHaving10Dollars() throws Exception {
+  public void deposit10DollarsToNewAccountResultsInAccountHaving10Dollars()  {
 
     Account account = new Account();
 
@@ -24,7 +24,7 @@ public class AccountDepositTest {
   }
 
   @Test
-  public void twoDepositsOf10And5DollarsResultInAccountHaving15Dollars() throws Exception {
+  public void twoDepositsOf10And5DollarsResultInAccountHaving15Dollars()  {
     Account account = new Account();
 
     account.deposit(10);
@@ -34,5 +34,6 @@ public class AccountDepositTest {
         .isEqualTo(15);
   }
 
+  //TODO: Check deposit negative balance
 
 }

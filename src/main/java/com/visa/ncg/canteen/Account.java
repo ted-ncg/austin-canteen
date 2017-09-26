@@ -4,8 +4,13 @@ public class Account {
 
 
   private int balance = 0;
+  private long id = 0L;
 
   public void deposit(int amount) {
+
+    if(amount < 0) {
+      throw new IllegalArgumentException();
+    }
     balance += amount;
   }
 
@@ -24,4 +29,7 @@ public class Account {
   }
 
 
+  public void setId(long l) { id = l;  }
+
+  public long getId() { return id;}
 }
