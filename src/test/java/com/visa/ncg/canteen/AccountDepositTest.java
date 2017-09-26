@@ -36,13 +36,17 @@ public class AccountDepositTest {
   }
 
   @Test
-  public void depositOfNegative15DollarsResultInIlligalArgumentException() {
+  public void depositOfNegative15DollarsResultInIllegalArgumentException() {
     Account account = new Account();
 
     assertThatThrownBy(() -> {account.deposit(-15);}).isInstanceOf(IllegalArgumentException.class);
+  }
 
+  @Test
+  public void depositOfZeroDollarsResultInIllegalArgumentException() {
+    Account account = new Account();
 
-
+    assertThatThrownBy(() -> {account.deposit(0);}).isInstanceOf(IllegalArgumentException.class);
   }
 
 }
