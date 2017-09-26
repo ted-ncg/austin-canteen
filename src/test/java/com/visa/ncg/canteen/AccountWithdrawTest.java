@@ -23,12 +23,12 @@ public class AccountWithdrawTest {
 
         Account account = new Account();
 
-        assertThatThrownBy(() -> { account.withdraw(-12); })
-                .isInstanceOf(InvalidWithdrawingAmountException.class);
+        assertThatThrownBy(() -> account.withdraw(-12))
+                .isInstanceOf(InvalidAmountException.class);
     }
 
     @Test
-    public void withdrawAmountAboveBalance() throws Exception {
+    public void withdrawAmountGreaterThanBalanceThrowsExceptions() throws Exception {
 
         Account account = new Account();
 

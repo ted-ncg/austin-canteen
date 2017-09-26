@@ -2,33 +2,37 @@ package com.visa.ncg.canteen;
 
 public class Account {
 
-  private int balance = 0;
+    private int balance;
 
-  public Account() {
+    public Account() {
+        balance = 0;
+    }
 
-  }
+    public Account(int initialBalance) {
+        balance = initialBalance;
+    }
 
-  public Account(int initialBalance) {
-    balance = initialBalance;
-  }
+    public void deposit(int amount) {
+        if (amount < 0) {
+            throw new InvalidAmountException();
+        }
 
-  public void deposit(int amount) {
-    balance += amount;
-  }
+        balance += amount;
+    }
 
-  public int balance() {
-    return balance;
-  }
+    public int balance() {
+        return balance;
+    }
 
-  public void withdraw(int amount) {
-      if (amount < 0) {
-          throw new InvalidWithdrawingAmountException();
-      }
+    public void withdraw(int amount) {
+        if (amount < 0) {
+            throw new InvalidAmountException();
+        }
 
-      if (amount > balance) {
-          throw new InsufficientBalanceException();
-      }
+        if (amount > balance) {
+            throw new InsufficientBalanceException();
+        }
 
-      balance -= amount;
-  }
+        balance -= amount;
+    }
 }
