@@ -15,4 +15,12 @@ public class AccountWithdrawTest {
 
         assertThat(account.balance()).isEqualTo(40);
     }
+   @Test (expected = IllegalArgumentException.class)
+    public void withdrraw50FromAccountWith20ResultsError() {
+        Account account = new Account();
+
+        account.deposit(20);
+        account.withdraw(50);
+
+    }
 }

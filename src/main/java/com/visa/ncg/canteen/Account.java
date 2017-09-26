@@ -9,7 +9,11 @@ public class Account {
   }
 
   public void withdraw(int amount) {
-    balance -= amount;
+    if(amount > balance) {
+      throw new IllegalArgumentException();
+    } else {
+      balance -= amount;
+    }
   }
 
   public int balance() {
