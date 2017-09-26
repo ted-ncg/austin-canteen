@@ -19,21 +19,20 @@ public class AccountWithdrawTest {
     }
 
     @Test
-    public void withdraw6FromNewAccountResultsInNegative6Balance() throws Exception {
-        Account account = new Account();
-
-        account.withdraw(6);
-
-        assertThat(account.balance())
-                .isEqualTo(-6);
-    }
-
-    @Test
     public void withdrawNegativeAmountThrowsException() throws Exception {
 
         Account account = new Account();
 
         assertThatThrownBy(() -> { account.withdraw(-12); })
+                .isInstanceOf(InvalidWithdrawingAmountException.class);
+    }
+
+    @Test
+    public void withdrawAmountAboveBalance() throws Exception {
+
+        Account account = new Account();
+
+        assertThatThrownBy(() -> { account.withdraw(12); })
                 .isInstanceOf(InsufficientBalanceException.class);
     }
 }

@@ -22,6 +22,10 @@ public class Account {
 
   public void withdraw(int amount) {
       if (amount < 0) {
+          throw new InvalidWithdrawingAmountException();
+      }
+
+      if (amount > balance) {
           throw new InsufficientBalanceException();
       }
 
