@@ -4,12 +4,18 @@ public class Account {
 
     private int balance;
 
+    private Long id = null;
+
     public Account() {
         balance = 0;
     }
 
     public Account(int initialBalance) {
         balance = initialBalance;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void deposit(int amount) {
@@ -34,5 +40,9 @@ public class Account {
         }
 
         balance -= amount;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
