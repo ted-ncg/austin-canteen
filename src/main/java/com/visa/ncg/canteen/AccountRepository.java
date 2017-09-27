@@ -1,18 +1,20 @@
 package com.visa.ncg.canteen;
 
+import org.springframework.stereotype.Controller;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Controller
 public class AccountRepository {
 
-    HashMap<Long, Account> accountMap;
-    private AtomicLong count;
+    private HashMap<Long, Account> accountMap;
+    private final AtomicLong count = new AtomicLong(1L);
 
     public AccountRepository() {
 
-        count = new AtomicLong();
         accountMap = new HashMap<>();
 
     }

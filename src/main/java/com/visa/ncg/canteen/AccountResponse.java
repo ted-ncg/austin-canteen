@@ -5,8 +5,6 @@ public class AccountResponse {
     private Long id;
     private int balance;
 
-    public AccountResponse() { }
-
     public Long getId() {
         return id;
     }
