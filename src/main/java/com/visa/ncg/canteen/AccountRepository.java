@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class AccountRepository {
 
   private Map<Long, Account> accountIdMap = new HashMap<>();
 
-  private final AtomicLong idGenerator = new AtomicLong();
+  private final IdGenerator idGenerator;
 
-  public AccountRepository() {
+  public AccountRepository(IdGenerator idGenerator) {
+    this.idGenerator = idGenerator;
   }
 
-  public AccountRepository(List<Account> accounts) {
+  public AccountRepository(List<Account> accounts, IdGenerator idGenerator) {
+    this.idGenerator = idGenerator;
     for (Account account : accounts) {
       accountIdMap.put(account.getId(), account);
     }
@@ -31,7 +32,7 @@ public class AccountRepository {
 
   public Account save(Account account) {
     if (account.getId() == null) {
-      account.setId(idGenerator.getAndIncrement());
+      account.setId(idGenerator.nextId());
     }
     accountIdMap.put(account.getId(), account);
 

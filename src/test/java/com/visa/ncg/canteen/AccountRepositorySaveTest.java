@@ -8,7 +8,9 @@ public class AccountRepositorySaveTest {
 
   @Test
   public void saveAccountWithoutIdReturnsAccountWithId() throws Exception {
-    AccountRepository accountRepository = new AccountRepository();
+
+    IdGenerator idGenerator = new FakeIdGenerator();
+    AccountRepository accountRepository = new AccountRepository(idGenerator);
     Account account = new Account();
 
     Account savedAccount = accountRepository.save(account);
@@ -22,7 +24,7 @@ public class AccountRepositorySaveTest {
 
   @Test
   public void saveAccountWithIdDoesNotChange() throws Exception {
-    AccountRepository accountRepository = new AccountRepository();
+    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator());
     Account account = new Account();
     account.setId(12L);
 
@@ -39,7 +41,7 @@ public class AccountRepositorySaveTest {
   public void saveTwoNewAccountsAssignsUniqueIds() throws Exception {
     Account account1 = new Account();
     Account account2 = new Account();
-    AccountRepository accountRepository = new AccountRepository();
+    AccountRepository accountRepository = new AccountRepository(new AtomicLongIdGenerator());
     accountRepository.save(account1);
     accountRepository.save(account2);
 

@@ -1,6 +1,5 @@
 package com.visa.ncg.canteen;
 
-
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findAllForEmptyRepositoryReturnsEmptyList() throws Exception {
-    AccountRepository accountRepository = new AccountRepository();
+    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator());
 
     assertThat(accountRepository.findAll())
         .isEmpty();
@@ -28,7 +27,8 @@ public class AccountRepositoryFindTest {
     accounts.add(a1);
     accounts.add(a2);
 
-    AccountRepository accountRepository = new AccountRepository(accounts);
+    IdGenerator idGenerator = new AtomicLongIdGenerator();
+    AccountRepository accountRepository = new AccountRepository(accounts, idGenerator);
 
     assertThat(accountRepository.findAll())
         .containsAll(accounts)
@@ -37,12 +37,10 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findExistingAccountReturnsAccount() throws Exception {
-    List<Account> accounts = new ArrayList<>();
-    Account a1 = new Account();
-    a1.setId(1L);
-    accounts.add(a1);
+    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator(1L));
 
-    AccountRepository accountRepository = new AccountRepository(accounts);
+    Account a1 = new Account();
+    accountRepository.save(a1);
 
     assertThat(accountRepository.findOne(1L))
         .isEqualTo(a1);
@@ -51,7 +49,7 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findAccountForNonExistentIdReturnsNull() throws Exception {
-    AccountRepository accountRepository = new AccountRepository();
+    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator());
 
     assertThat(accountRepository.findOne(2L))
         .isNull();
