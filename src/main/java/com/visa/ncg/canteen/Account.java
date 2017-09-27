@@ -10,6 +10,10 @@ public class Account {
 
     public Account(int initialBalance) { balance = initialBalance; }
 
+    public void setBalance(int balance) { this.balance = balance; }
+
+    public int getBalance() { return balance;}
+
     public void setId(long id) { this.id = id; }
 
     public Long getId() { return id; }
