@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class AtomicLongIdGenerator implements IdGenerator {
 
-  private final AtomicLong sequence = new AtomicLong();
+  private final AtomicLong sequence = new AtomicLong(1L);
 
   @Override
   public Long nextId() {
