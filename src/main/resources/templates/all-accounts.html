@@ -11,8 +11,8 @@
         <th>Balance</th>
     </tr>
     <tr th:each="account : ${accounts}">
-        <th th:text="${account.name}">Account Name</th>
-        <th th:text="${account.balance}">Balance</th>
+        <td><a th:href="@{/account/{id}(id =${account.id})}"><span th:text="${account.name}">Account Name</span></a></td>
+        <td th:text="${account.balance}">Balance</td>
     </tr>
 </table>
 </body>
