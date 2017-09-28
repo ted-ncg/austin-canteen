@@ -1,39 +1,40 @@
 package com.visa.ncg.canteen;
 
 public class AccountResponse {
+  private Long id;
+  private int balance;
+  private String name;
 
-    private int balance;
-    private Long id;
-    private String name;
+  public int getBalance() {
+    return balance;
+  }
 
-    public int getBalance() {
-        return balance;
-    }
+  public void setBalance(int balance) {
+    this.balance = balance;
+  }
 
-    public String getName(){
-        return name;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setName(String name)
-    {
-        this.name=name;
-    }
-
-    public AccountResponse fromAccount(Account account) {
-        AccountResponse accountResponse = new AccountResponse();
-        return accountResponse;
-    }
+  public static AccountResponse fromAccount(Account account) {
+    AccountResponse accountResponse = new AccountResponse();
+    accountResponse.setId(account.getId());
+    accountResponse.setBalance(account.balance());
+    accountResponse.setName(account.getName());
+    return accountResponse;
+  }
 
 }

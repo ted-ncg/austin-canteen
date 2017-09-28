@@ -8,21 +8,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountApiController {
 
-    private AccountRepository accountRepository;
+  private AccountRepository accountRepository;
 
-    @Autowired
-    public AccountApiController(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+  @Autowired
+  public AccountApiController(AccountRepository accountRepository) {
+    this.accountRepository = accountRepository;
+  }
 
+  @GetMapping("/api/accounts/{id}")
+  public AccountResponse accountInfo(@PathVariable("id") String id) {
+    Account account = accountRepository.findOne(Long.valueOf(id));
 
-    @GetMapping("api/accounts/{id}")
-    public AccountResponse accountInfo(@PathVariable("id") String accountId) {
-        Account account = accountRepository.findOne(Long.valueOf(accountId));
-        AccountResponse response = new AccountResponse();
-        response.setId(account.getId());
-        response.setBalance(account.balance());
-        return response;
-    }
+    // convert to a response object...
+    AccountResponse accountResponse = new AccountResponse();
+    accountResponse.setBalance(account.balance());
+    accountResponse.setId(account.getId());
 
+    return accountResponse;
+  }
 }

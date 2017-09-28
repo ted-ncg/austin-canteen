@@ -2,8 +2,8 @@ package com.visa.ncg.canteen;
 
 public class Account {
 
-  private int balance;
   private Long id;
+  private int balance;
   private String name;
 
   public Account() {

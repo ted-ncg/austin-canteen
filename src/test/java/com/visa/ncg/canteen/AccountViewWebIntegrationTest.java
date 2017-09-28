@@ -17,16 +17,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AccountViewWebIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Test
-    public void getReturnsViewWithAccountResponseInModel() throws Exception {
-        mockMvc.perform(get("/account/1"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("account"))
-                .andExpect(model().attribute("account", instanceOf(AccountResponse.class)))
-                .andExpect(view().name("account-view"));
-    }
+  @Test
+  public void getReturnsViewWithAccountResponseInModel() throws Exception {
+    mockMvc.perform(get("/account/1"))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeExists("account"))
+        .andExpect(model().attribute("account", instanceOf(AccountResponse.class)))
+        .andExpect(view().name("account-view"));
+  }
 
 }

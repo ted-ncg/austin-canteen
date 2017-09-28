@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
     <head>
         <meta charset="UTF-8">
@@ -9,4 +10,17 @@
         <p>Balance in USD: $<span th:text="${account.balance}">balanceAmount</span></p>
         <p>Balance in GBP: £<span th:text="${gbpConversion}"> conversionAmount </span></p>
     </body>
+=======
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Account View</title>
+</head>
+<body>
+
+<h1>Account Name: <span th:text="${account.name}">Spring</span></h1>
+<h2>Balance: $<span th:text="${account.balance}">100</span></h2>
+
+</body>
+>>>>>>> 405b594e20d382809578f1c97ebd44ba58f1ae79
 </html>

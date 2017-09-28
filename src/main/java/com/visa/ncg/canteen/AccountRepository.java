@@ -15,7 +15,7 @@ public class AccountRepository {
 
   private final IdGenerator idGenerator;
 
-  @Autowired
+  @Autowired // make sure Spring uses this constructor
   public AccountRepository(IdGenerator idGenerator) {
     this.idGenerator = idGenerator;
   }
