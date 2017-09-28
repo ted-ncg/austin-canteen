@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Account View</title>
 </head>
 <body>
 
-<h1>Account: 99</h1>
-<h2>Balance: $100</h2>
+<h1>Account: <span th:text="${account.id}">99</span></h1>
+<h2>Balance: $<span th:text="${account.balance}">100</span></h2>
 
 </body>
 </html>
