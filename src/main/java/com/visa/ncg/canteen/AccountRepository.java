@@ -1,16 +1,21 @@
 package com.visa.ncg.canteen;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class AccountRepository {
 
   private Map<Long, Account> accountIdMap = new HashMap<>();
 
   private final IdGenerator idGenerator;
 
+  @Autowired
   public AccountRepository(IdGenerator idGenerator) {
     this.idGenerator = idGenerator;
   }
