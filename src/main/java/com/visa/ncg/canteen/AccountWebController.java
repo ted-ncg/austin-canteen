@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class AccountWebController {
 
@@ -21,13 +24,22 @@ public class AccountWebController {
       Model model) {
     Account account = accountRepository.findOne(Long.valueOf(id));
 
-    AccountResponse accountResponse = new AccountResponse();
-    accountResponse.setId(account.getId());
-    accountResponse.setBalance(account.balance());
-    accountResponse.setName(account.getName());
+    AccountResponse accountResponse = AccountResponse.fromAccount(account);
 
     model.addAttribute("account", accountResponse);
     return "account-view";
+  }
+
+  @GetMapping("/account")
+  public String allAccounts(Model model) {
+    List<Account> accounts = accountRepository.findAll();
+
+    List<AccountResponse> responses = accounts.stream()
+        .map(AccountResponse::fromAccount)
+        .collect(Collectors.toList());
+
+    model.addAttribute("accounts", responses);
+    return "all-accounts";
   }
 
 }
