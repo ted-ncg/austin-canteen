@@ -1,8 +1,9 @@
 package com.visa.ncg.canteen;
 
 public class AccountResponse {
-  private int balance;
   private Long id;
+  private int balance;
+  private String name;
 
   public int getBalance() {
     return balance;
@@ -18,5 +19,13 @@ public class AccountResponse {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }
