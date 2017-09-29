@@ -3,11 +3,14 @@ package com.visa.ncg.canteen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +39,7 @@ public class AccountWebController {
 
     @GetMapping("/account")
     public String allAccountsView(Model model) {
-        List<Account> accounts = repo.findAll();
+        List<Account> accounts = (List<Account>) repo.findAll();
         List<AccountResponse>  responses = new ArrayList<AccountResponse>();
         for (Account account : accounts) {
             responses.add(new AccountResponse(account));
@@ -48,14 +51,20 @@ public class AccountWebController {
     }
 
     @GetMapping("/create-account")
-    public String createAccountForm() {
+    public String createAccountForm(Model model) {
+        CreateForm form = new CreateForm();
+        form.setInitialDeposit(new BigDecimal(10));
+        model.addAttribute("createForm", form);
         return "create-account";
     }
 
     @PostMapping("/create-account")
-    public String createAccount(@ModelAttribute("accountName") String name) {
-        Account account = new Account();
-        account.setName(name);
+    public String createAccount(@ModelAttribute("createForm") @Valid CreateForm form, BindingResult result) {
+        if (result.hasErrors()) {
+            return "create-account";
+        }
+        Account account = new Account(form.getInitialDeposit(), form.getOverdraftLimit());
+        account.setName(form.getAccountName());
         repo.save(account);
         return ("redirect:/account/" + account.getId());
 

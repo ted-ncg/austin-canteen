@@ -3,13 +3,14 @@ package com.visa.ncg.canteen;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class CurrencyService {
 
-    int convertToGBP (int amount) {
+    BigDecimal convertToGBP (BigDecimal amount) {
 
         RestTemplate api = new RestTemplate();
 
@@ -17,7 +18,7 @@ public class CurrencyService {
         Map<String, String> params = new HashMap<>();
         params.put("from", "USD");
         params.put("to", "GBP");
-        params.put("amount", Integer.toString(amount));
+        params.put("amount", Integer.toString(amount.intValue()));
         ConvertedCurrency currency = new ConvertedCurrency();
         try {
             currency = api.getForObject(currencyConvertURl, ConvertedCurrency.class, params);
@@ -26,7 +27,7 @@ public class CurrencyService {
             e.printStackTrace();
         }
 
-        return (int) currency.getConverted();
+        return currency.getConverted();
     }
 
 }

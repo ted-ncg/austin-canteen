@@ -1,5 +1,6 @@
 package com.visa.ncg.canteen;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
@@ -42,6 +45,8 @@ public class CreateAccountWebIntegrationTest {
                 post("/create-account")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("accountName", "Video Games")
+                        .param("initialBalance", "10.0")
+                        .param("overdraftLimit", "1.0")
         )
                 .andExpect(status().is3xxRedirection())
                 .andReturn();

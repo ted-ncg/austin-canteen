@@ -1,45 +1,64 @@
 package com.visa.ncg.canteen;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.math.BigDecimal;
+
+@Entity
 public class Account {
 
-  private int balance;
+  private BigDecimal balance;
+  private BigDecimal overdraftLimit;
+  @Id
+  @GeneratedValue(strategy= GenerationType.AUTO)
   private Long id;
   private String name;
 
   public Account() {
-    balance = 0;
+    balance = new BigDecimal(0);
+    overdraftLimit = new BigDecimal(0);
   }
 
-  public Account(int initialBalance) {
+  public Account(BigDecimal initialBalance) {
     balance = initialBalance;
+    overdraftLimit = new BigDecimal(0);
   }
 
-  public void deposit(int amount) {
+  public Account (BigDecimal initialBalance, BigDecimal overdraftLimit) {
+      balance = initialBalance;
+      this.overdraftLimit = overdraftLimit;
+  }
+
+  public void deposit(BigDecimal amount) {
     validateAmount(amount);
-
-    balance += amount;
+    balance = balance.add(amount);
+    System.out.println(balance());
   }
 
-  private void validateAmount(int amount) {
-    if (amount <= 0) {
+  private void validateAmount(BigDecimal amount) {
+    if (amount.compareTo(new BigDecimal(0)) <= 0) {
       throw new InvalidAmountException();
     }
   }
 
-  public int balance() {
+  public BigDecimal balance() {
     return balance;
   }
 
-  public void withdraw(int amount) {
+  public void withdraw(BigDecimal amount) {
     validateAmount(amount);
     validateSufficientBalance(amount);
 
-    balance -= amount;
+    balance = balance.subtract(amount);
   }
 
-  private void validateSufficientBalance(int amount) {
-    if (amount > balance) {
-      throw new InsufficientBalanceException();
+  private void validateSufficientBalance(BigDecimal amount) {
+      BigDecimal temp;
+      temp = balance.add(overdraftLimit);
+      if (amount.compareTo(temp) == 1) {
+        throw new InsufficientBalanceException();
     }
   }
 
@@ -59,4 +78,11 @@ public class Account {
     this.name = name;
   }
 
+    public BigDecimal getOverdraftLimit() {
+        return overdraftLimit;
+    }
+
+    public void setOverdraftLimit(BigDecimal overdraftLimit) {
+        this.overdraftLimit = overdraftLimit;
+    }
 }

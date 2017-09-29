@@ -1,9 +1,11 @@
 package com.visa.ncg.canteen;
 
+import java.math.BigDecimal;
+
 public class AccountResponse {
 
-    private int balance;
-    private int gbpBalance;
+    private BigDecimal balance;
+    private BigDecimal gbpBalance;
     private Long id;
     private String name;
 
@@ -30,15 +32,25 @@ public class AccountResponse {
 
     public void setId(Long id) {this.id = id;}
 
-    public int getBalance() { return balance; }
+    public BigDecimal getBalance() { return balance; }
 
     public void setBalance() { this.balance = balance; }
 
-    public int getGbpBalance() {
+    public BigDecimal getGbpBalance() {
         return gbpBalance;
     }
 
-    public void setGbpBalance(int gbpBalance) {
+    public void setGbpBalance(BigDecimal gbpBalance) {
         this.gbpBalance = gbpBalance;
+    }
+
+    public boolean isOverdrawn () {
+
+        if (balance.compareTo(new BigDecimal(0)) < 0) {
+
+            return true;
+        }
+
+        else return false;
     }
 }

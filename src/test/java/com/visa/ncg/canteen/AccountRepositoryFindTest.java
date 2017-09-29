@@ -11,7 +11,7 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findAllForEmptyRepositoryReturnsEmptyList() throws Exception {
-    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator());
+    InMemAccountRepository accountRepository = new InMemAccountRepository(new FakeIdGenerator());
 
     assertThat(accountRepository.findAll())
         .isEmpty();
@@ -28,7 +28,7 @@ public class AccountRepositoryFindTest {
     accounts.add(a2);
 
     IdGenerator idGenerator = new AtomicLongIdGenerator();
-    AccountRepository accountRepository = new AccountRepository(accounts, idGenerator);
+    InMemAccountRepository accountRepository = new InMemAccountRepository(accounts, idGenerator);
 
     assertThat(accountRepository.findAll())
         .containsAll(accounts)
@@ -37,7 +37,7 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findExistingAccountReturnsAccount() throws Exception {
-    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator(1L));
+    InMemAccountRepository accountRepository = new InMemAccountRepository(new FakeIdGenerator(1L));
 
     Account a1 = new Account();
     accountRepository.save(a1);
@@ -49,7 +49,7 @@ public class AccountRepositoryFindTest {
 
   @Test
   public void findAccountForNonExistentIdReturnsNull() throws Exception {
-    AccountRepository accountRepository = new AccountRepository(new FakeIdGenerator());
+    InMemAccountRepository accountRepository = new InMemAccountRepository(new FakeIdGenerator());
 
     assertThat(accountRepository.findOne(2L))
         .isNull();

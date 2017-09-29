@@ -1,9 +1,11 @@
 package com.visa.ncg.canteen;
 
+import java.math.BigDecimal;
+
 public class ConvertedCurrency {
 
     private String currency;
-    private float converted;
+    private BigDecimal converted;
 
 
     public String getCurrency() {
@@ -14,11 +16,11 @@ public class ConvertedCurrency {
         this.currency = currency;
     }
 
-    public float getConverted() {
+    public BigDecimal getConverted() {
         return converted;
     }
 
-    public void setConverted(float converted) {
+    public void setConverted(BigDecimal converted) {
         this.converted = converted;
     }
 
