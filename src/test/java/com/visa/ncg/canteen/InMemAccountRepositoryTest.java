@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AccountRepositoryTest {
+public class InMemAccountRepositoryTest {
 
     @Test
     public void findAllShouldReturn2Accounts() {
@@ -21,7 +21,7 @@ public class AccountRepositoryTest {
         accounts.add(a1);
         accounts.add(a2);
 
-        AccountRepository repo = new AccountRepository(accounts);
+        InMemAccountRepository repo = new InMemAccountRepository(accounts);
         assertThat(repo.findAll())
                 .hasSize(2);
 
@@ -32,7 +32,7 @@ public class AccountRepositoryTest {
 
         Account account = new Account();
 
-        AccountRepository repo = new AccountRepository();
+        InMemAccountRepository repo = new InMemAccountRepository();
         account = repo.save(account);
 
         assertThat(account.getId())
@@ -43,11 +43,11 @@ public class AccountRepositoryTest {
     @Test
     public void newlySavedAccountsHaveUniqueIds() {
 
-        AccountRepository accountRepository = new AccountRepository();
+        InMemAccountRepository inMemAccountRepository = new InMemAccountRepository();
         Account account1 = new Account();
-        accountRepository.save(account1);
+        inMemAccountRepository.save(account1);
         Account account2 = new Account();
-        accountRepository.save(account2);
+        inMemAccountRepository.save(account2);
 
         assertThat(account1.getId())
                 .isNotEqualTo(account2.getId());
@@ -57,7 +57,7 @@ public class AccountRepositoryTest {
     @Test
     public void findOneReturnsNullWhenIdDoesNotExist() {
 
-        AccountRepository accountRepo = new AccountRepository();
+        InMemAccountRepository accountRepo = new InMemAccountRepository();
         Account account = new Account();
 
         account.setId(2L);
@@ -71,7 +71,7 @@ public class AccountRepositoryTest {
     @Test
     public void findOneReturnsAccountWithGivenId() throws Exception {
 
-        AccountRepository repo = new AccountRepository();
+        InMemAccountRepository repo = new InMemAccountRepository();
 
         Account account = new Account();
         account.setId(1L);

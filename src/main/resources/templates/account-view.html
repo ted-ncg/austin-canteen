@@ -5,7 +5,15 @@
     <title>Account Information</title>
 </head>
 <body>
-<h1>Account 99</h1>
-<p>Balance: $100</p>
+<h1>Account <span th:text="${account.name}">FooBar</span></h1>
+<p>USD Balance: $
+    <span th:text="${account.balance}"
+          th:style="${account.overdrawn} ? 'color:black' : 'color:#FF5733'">99
+    </span>
+</p>
+<p>GBP Balance: £
+    <span th:text="${currency.converted}"
+          th:style="${account.overdrawn} ? 'color:black' : 'color:#FF5733'">100
+    </span>
 </body>
 </html>
